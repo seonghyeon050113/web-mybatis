@@ -1,6 +1,7 @@
 package com.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.web.dto.GameDTO;
 import com.web.repository.GameRepository;
@@ -8,8 +9,8 @@ import com.web.repository.GameRepository;
 public class GameService {
 	private GameRepository gr = new GameRepository();
 
-	public List<GameDTO> selectGames() {
-		return gr.selectGames(null);
+	public List<GameDTO> selectGames(Map<String,String> param) {
+		return gr.selectGames(param);
 	}
 	public GameDTO selectGame(int giNum) {
 		return gr.selectGame(giNum);

@@ -1,6 +1,7 @@
 package com.web.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -8,9 +9,9 @@ import com.web.common.CommonFactory;
 import com.web.dto.GameDTO;
 
 public class GameRepository {
-	public List<GameDTO> selectGames(GameDTO game) {
+	public List<GameDTO> selectGames(Map<String,String> param) {
 		try(SqlSession session = CommonFactory.getSSF().openSession()){
-			return session.selectList("GameMapper.selectGames",game); 
+			return session.selectList("GameMapper.selectGames",param); 
 		}
 	}
 	public GameDTO selectGame(int giNum) {
@@ -51,4 +52,5 @@ public class GameRepository {
 		//int result = gr.insertGame(game);
 		//System.out.println(result);
 	}
+	
 }

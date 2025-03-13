@@ -7,6 +7,24 @@
 		SELECT GI_NUM, GI_NAME,
 		GI_PRICE, GI_GENRE, GI_DESC
 		FROM GAME_INFO
+		<where>
+			<if test='searchStr != null and searchStr!=""'>
+				<if test='search=="giName"'>
+					And GI_NAME LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+				<if test='search=="giPrice"'>
+					And GI_Price=#{searchStr}
+				</if>
+				<if test='search=="giGenre"'>
+					And GI_Genre LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+				<if test='search=="giDesc"'>
+					And GI_Desc LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+			</if>
+		
+		
+		</where>
 	</select>
 	<select id="selectGame" resultType="com.web.dto.GameDTO">
 		select GI_NUM,GI_NAME,GI_PRICE, GI_GENRE, GI_DESC
