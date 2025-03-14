@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FoodMapper">
+  <select id="selectFoods" resultType="com.web.dto.FoodDTO">
+    select FI.FI_NUM,FI.FI_NAME,FI.FI_PRICE,FI.CREDAT,UI.UI_NUM 
+    from FOOD_INFO FI inner join USER_INFO UI on FI.UI_NUM = UI.UI_NUM
+  </select>
+  <select id="selectFood" resultType="com.web.dto.FoodDTO">
+  	select FI.FI_NUM,FI.FI_NAME,FI.FI_PRICE,FI.CREDAT,UI.UI_NUM 
+  	from FOOD_INFO FI inner join USER_INFO UI on FI.UI_NUM = UI.UI_NUM
+	where BI.UI_NUM=#{uiNum}
+  </select>
+  <insert id="insertFood">
+  	insert into FOOD_INFO(UI_NUM,FI_NAME,FI_PRICE) values(#{uiNum},#{fiName},#{fiPrice})
+  </insert>
+  <update id="updateFood">
+  	update FOOD_INFO set UI_NUM=#{uiNum},FI_NAME=#{fiName},FI_PRICE=#{fiPrice} 
+  	where FI_NUM=#{fiNum}
+  </update>
+  <delete id="deleteFood">
+  	delete from FOOD_INFO where FI_NUM=#{fiNum};
+  </delete>
+</mapper>

@@ -7,13 +7,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserDTO {
+public class BoardDTO {
+	private int biNum;
+	private String biTitle;
+	private String biContent;
 	private int uiNum;
+	private String credat;
+	private String cretim;
 	private String uiName;
-	private int uiAge;
-	private String uiId;
-	private String uiPwd;
-	private String uiAddress;
-	private String uiTrans;
-	private String uiPhone;
 }

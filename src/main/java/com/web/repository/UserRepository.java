@@ -20,7 +20,7 @@ public class UserRepository {
 	}
 	public UserDTO selectUserbyUiId(String uiId){
 		try(SqlSession session = CommonFactory.getSSF().openSession()){
-			return session.selectOne("UserMapper.selectUser",uiId);
+			return session.selectOne("UserMapper.selectUserByUiNum",uiId);
 		}
 	}
 	public int insertUser(UserDTO user){

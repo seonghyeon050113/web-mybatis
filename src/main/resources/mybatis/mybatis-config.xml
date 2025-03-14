@@ -21,5 +21,7 @@
 	<mappers>
 		<mapper resource="mybatis/mapper/GameMapper.xml" />
 		<mapper resource="mybatis/mapper/UserMapper.xml" />
+		<mapper resource="mybatis/mapper/BoardMapper.xml"/>
+		<mapper resource="mybatis/mapper/FoodMapper.xml"/>
 	</mappers>
 </configuration>

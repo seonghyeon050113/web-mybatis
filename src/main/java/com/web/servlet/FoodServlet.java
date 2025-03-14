@@ -1,6 +1,7 @@
 package com.web.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,23 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/views/*")
-public class ViewsServlet extends HttpServlet {
+import com.web.common.CommonCMD;
+import com.web.dto.FoodDTO;
+import com.web.service.FoodService;
+
+
+@WebServlet(urlPatterns = "/food/*")
+public class FoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String PREFIX = "/WEB-INF";
-	private static final String SUFFIX = ".jsp";
-    
+    FoodService foodService = new FoodService();   
+
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uri = PREFIX + request.getRequestURI() + SUFFIX;
-		RequestDispatcher rd = request.getRequestDispatcher(uri);
-		rd.forward(request, response);
+		String cmd = CommonCMD.getCmd(request);
+		if("food-list".equals(cmd)) {
+			List<FoodDTO> selectList = foodService.selectFoods(null);
+			request.setAttribute("selectList", selectList);
+		}else if("food-view".equals(cmd)) {
+			
+		}
+		CommonCMD.viewsForward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

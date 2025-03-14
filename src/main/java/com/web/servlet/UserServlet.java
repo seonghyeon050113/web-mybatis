@@ -30,16 +30,19 @@ public class UserServlet extends HttpServlet {
 		if ("user-list".equals(cmd)) {
 			List<UserDTO> users = userService.selectUsers(null);
 			request.setAttribute("users", users);
-			RequestDispatcher rd = request.getRequestDispatcher(cmd);
-			rd.forward(request, response);
-		}else if("user-view".equals(cmd)) {
-		
+
+		} else if ("user-view".equals(cmd)) {
+
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("/views" + uri);
+		rd.forward(request, response);
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		int idx = uri.lastIndexOf("/")+1;
+		int idx = uri.lastIndexOf("/") + 1;
 		String cmd = uri.substring(idx);
 		UserDTO user = new UserDTO();
 		try {
@@ -53,15 +56,15 @@ public class UserServlet extends HttpServlet {
 		}
 		String msg = "";
 		String url = "";
-		if("login".equals(cmd)) {
+		if ("login".equals(cmd)) {
 			UserDTO loginUser = userService.login(user.getUiId(), user.getUiPwd());
 			HttpSession session = request.getSession();
 			session.setAttribute("user", loginUser);
 			msg = "아이디나 비밀번호가 잘못되었습니다";
 			url = "/views/user/login";
-			if(loginUser!=null) {
+			if (loginUser != null) {
 				msg = loginUser.getUiName() + "님 반갑습니다";
-				url ="/";
+				url = "/";
 			}
 		}
 		request.setAttribute("msg", msg);
