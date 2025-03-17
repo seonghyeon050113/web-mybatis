@@ -23,7 +23,7 @@
 				<c:forEach items="${selectList}" var="food">
 					<tr>
 						<td>${food.fiNum}</td>
-						<td>${food.fiName}</td>
+						<td><a href="food/food-view">${food.fiName}</a></td>
 						<td>${food.fiPrice}</td>
 						<td>${food.uiName}</td>
 						
@@ -33,8 +33,8 @@
 						<td>
 					</tr>
 				</c:forEach>
-		</table>s
-
+		</table>
+	<a href="/food/food-insert">메뉴등록</a>
 	</form>
 </body>
 </html>

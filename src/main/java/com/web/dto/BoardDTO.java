@@ -15,4 +15,5 @@ public class BoardDTO {
 	private String credat;
 	private String cretim;
 	private String uiName;
+	private String biPath;
 }

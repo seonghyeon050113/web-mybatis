@@ -1,14 +1,19 @@
 package com.web.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -17,7 +22,14 @@ import com.web.dto.BoardDTO;
 import com.web.service.BoardService;
 
 @WebServlet(urlPatterns = "/board/*")
+@MultipartConfig(
+		fileSizeThreshold = 1024*100,
+		maxFileSize = 1024*1024&100,
+		maxRequestSize = 1024*1024*500
+		)
+
 public class BoardServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	BoardService boardService = new BoardService();
 
@@ -41,6 +53,20 @@ public class BoardServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		String uploadPath = request.getServletContext().getRealPath("")+"/upload";
+		File root = new File(uploadPath);
+		if(!root.exists()) {
+			root.mkdir();
+		}
+		Collection<Part> parts =request.getParts();
+			for (Part part: parts) {
+				String name = part.getName();
+				String submittedFilename = part.getSubmittedFileName();
+				out.println("name:"+name+", submittedFilename:"+submittedFilename+"<br>");
+			}
+		
+		
 		String cmd = CommonCMD.getCmd(request);
 		BoardDTO board = new BoardDTO();
 		try {

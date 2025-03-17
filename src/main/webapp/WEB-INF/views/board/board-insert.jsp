@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>게시물 등록</h3>
-<form method="POST" action="/board/insert">
+<form method="POST" action="/board/insert" enctype = "mulipart/form-data">
 	<input type="hidden" name="uiNum" value="${user.uiNum}">
 	<table border="1">
 		<tr>
@@ -22,6 +22,10 @@
 		<tr>
 			<th>내용</th>
 			<td><textarea name="biContent"></textarea></td>
+		</tr>
+		<tr>
+			<th>파일</th>
+			<td><input type="file" name ="biFile"></td>
 		</tr>
 		<tr>
 			<th colspan="2">
